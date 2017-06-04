@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id='content'></div>
+
+    <script type="text/babel">
+
+        var CONTACTS = [
+            {
+                id: 1,
+                name: 'Τσάντες διαφημιστικές',
+                phoneNumber: '> Κατηγορία',
+                image: 'http://www.epsilonbratanis.gr/c/14-category_default_btt/τσάντες-διαφημιστικές.jpg'
+            }, {
+                id: 2,
+                name: '     Συσκευασία',
+                phoneNumber: 'Τσάντες - Διαφημιστικές',
+                image: 'http://www.epsilonbratanis.gr/c/13-category_default_btt/συσκευασία.jpg'
+            }, {
+                id: 3,
+                name: '   Αναλώσιμα Είδη',
+                phoneNumber: 'Συσκευασία',
+                image: 'http://www.epsilonbratanis.gr/c/17-category_default_btt/αναλώσιμα-διαφημιστικά.jpg'
+            }, {
+                id: 4,
+                name: 'Cooler',
+                phoneNumber: 'Id: 77032',
+                image: 'http://www.epsilonbratanis.gr/224-category_default_btt/cooler.jpg'
+            }, {
+                id: 5,
+                name: 'Marco Polo',
+                phoneNumber: 'Id > 236335342',
+                image: 'http://www.epsilonbratanis.gr/223-category_default_btt/3-zip.jpg'
+            }, {
+                id: 6,
+                name: 'Pasa Polo',
+                phoneNumber: 'Id > 27635342',
+                image: 'http://www.epsilonbratanis.gr/223-category_default_btt/3-zip.jpg'
+            }, {
+                id: 7,
+                name: 'Pasarella',
+                phoneNumber: 'Κωδικός προιον. 120234',
+                image: 'https://media.giphy.com/media/RUUdVZqwpfTRS/giphy.gif'
+            }
+        ];
+
+        var Contact = React.createClass({
+            render: function() {
+                return (
+                    <li className="contact">
+                        <img className="contact-image" src={this.props.image} width="50px" height="50px" />
+                        <div className="contact-info">
+                            <div className="contact-name"> &nbsp;&nbsp;{this.props.name} </div>
+                            <div className="contact-number"> &nbsp;&nbsp;&nbsp;{this.props.phoneNumber} </div>
+                        </div>
+                    </li>
+                );
+            }
+        });
+
+        var ContactsList = React.createClass({
+
+            getInitialState: function() {
+                return {
+                    displayedContacts: CONTACTS
+                };
+            },
+
+            unfocus: function(event) {
+                document.getElementById('contactslist').style.visibility = 'hidden';
+
+            },
+
+
+            handleSearch: function(event) {
+
+                var changeIt = document.getElementById('contactslist');
+                changeIt.style.visibility = 'visible';
+
+                // added by me "if-else"
+                if (!event.target.value.length) {
+                    var changeIt = document.getElementById('contactslist');
+                    changeIt.style.visibility = 'hidden';
+                    //return;
+                } 
+
+                else
+                {
+                    var searchQuery = event.target.value.toLowerCase();
+                    var displayedContacts = CONTACTS.filter(function(el) {
+                        var searchValue = el.name.toLowerCase();
+
+                        return searchValue.indexOf(searchQuery) !== -1;
+                    });
+                }
+
+                this.setState({
+                    displayedContacts: displayedContacts
+                });
+            },
+
+            render: function() {
+                return (
+                    <div className="contacts">
+                        <input type="text" className="search-field" onChange={this.handleSearch} onblur={this.unfocus} />
+                        <ul className="contacts-list" id="contactslist">
+                            {
+
+
+
+                               this.state.displayedContacts.map(function(el) {
+                                    return <Contact
+                                        key={el.id}
+                                        name={el.name}
+                                        phoneNumber={el.phoneNumber}
+                                        image={el.image}
+                                    />;
+                               })
+                            }
+                        </ul>
+                    </div>
+                );
+            }
+        });
+
+
+
+        ReactDOM.render(
+            <ContactsList />,
+            document.getElementById("content")
+        );
+
+    </script>
+</body>
+</html>
