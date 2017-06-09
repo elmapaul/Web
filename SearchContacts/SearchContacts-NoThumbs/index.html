@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id='content'></div>
+
+    <script type="text/babel">
+
+        var CONTACTS = [
+            {
+                id: 1,
+                name: 'Τσάντες διαφημιστικές',
+                phoneNumber: '> Κατηγορία',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/36-voyage.html'
+            }, {
+                id: 2,
+                name: '     Συσκευασία',
+                phoneNumber: 'Τσάντες - Διαφημιστικές',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/315-daisy-plus.html'                
+            }, {
+                id: 3,
+                name: '   Αναλώσιμα Είδη',
+                phoneNumber: 'Συσκευασία',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/41-oxford.html'                
+            }, {
+                id: 4,
+                name: 'Cooler',
+                phoneNumber: 'Id: 77032',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/56-columbia.html'                
+            }, {
+                id: 5,
+                name: 'Marco Polo',
+                phoneNumber: 'Id >> 236335342',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/321-pasarela.html'                
+            }, {
+                id: 6,
+                name: 'Pasa Polo',
+                phoneNumber: 'Κατηγορία: Necessery Bags',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/56-columbia.html'                
+            }, {
+                id: 7,
+                name: 'Pasarella',
+                phoneNumber: 'Κωδικός προιον. 120234',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%BF%CE%B9%CE%BA%CE%BF%CE%BB%CE%BF%CE%B3%CE%B9%CE%BA%CE%AD%CF%82/68-birdy.html'                
+            }, {
+                id: 8,
+                name: 'Uguerra',
+                phoneNumber: 'Κωδικός προιον. 720234',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/44-winston.html'                
+            }, {
+                id: 9,
+                name: 'Τσάντες διαφημιστικές',
+                phoneNumber: '> Κατηγορία',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/36-voyage.html'
+            }, {
+                id: 10,
+                name: '     Συσκευασία',
+                phoneNumber: 'Τσάντες - Διαφημιστικές',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/315-daisy-plus.html'                
+            }, {
+                id: 11,
+                name: '   Αναλώσιμα Είδη',
+                phoneNumber: 'Συσκευασία',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/41-oxford.html'                
+            }, {
+                id: 12,
+                name: 'Cooler',
+                phoneNumber: 'Id: 77032',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/56-columbia.html'                
+            }, {
+                id: 13,
+                name: 'Marco Polo',
+                phoneNumber: 'Id >> 236335342',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/321-pasarela.html'                
+            }, {
+                id: 14,
+                name: 'Pasa Polo',
+                phoneNumber: 'Id > 27635342',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/56-columbia.html'                
+            }, {
+                id: 15,
+                name: 'Pasarella',
+                phoneNumber: 'Κωδικός προιον. 120234',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%BF%CE%B9%CE%BA%CE%BF%CE%BB%CE%BF%CE%B3%CE%B9%CE%BA%CE%AD%CF%82/68-birdy.html'                
+            }, {
+                id: 16,
+                name: 'Uguerra',
+                phoneNumber: 'Κωδικός προιον. 720234',
+                url: 'http://www.epsilonbratanis.gr/el/%CF%84%CF%83%CE%AC%CE%BD%CF%84%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CF%86%CE%B7%CE%BC%CE%B9%CF%83%CF%84%CE%B9%CE%BA%CE%AD%CF%82/44-winston.html'                
+            }
+        ];
+
+
+
+        var Contact = React.createClass({
+            render: function() {
+                return (
+                    <li className="contact">
+                        <div className="contact-info">
+                            <a href={this.props.url} >
+                            <div className="contact-name"> &nbsp;&nbsp;{this.props.name} </div>
+                            <div className="contact-number"> &nbsp;&nbsp;&nbsp;{this.props.phoneNumber} </div>
+                            </a>
+                        </div>
+                    </li>
+                );
+            }
+        });
+
+        var ContactsList = React.createClass({
+
+            getInitialState: function() {
+                return {
+                    displayedContacts: CONTACTS
+                };
+            },
+
+
+            handleSearch: function(event) {
+
+                var changeIt = document.getElementById('contactslist');
+                changeIt.style.visibility = 'visible';
+
+                changeIt.style.width = '330px';
+                changeIt.style.height = '600px';
+
+
+                //changeIt.style.margin="50px 10px 20px 30px";
+                /*
+                // added by me "if-else"
+                if (!event.target.value.length){
+                    var changeIt = document.getElementById('contactslist');
+                    ///changeIt.style.visibility = 'hidden'; 
+                    //changeIt.style.margin="-10% 0 0";                   
+                    //return;
+                } 
+                else
+                {*/
+                    var changeIt = document.getElementById('contactslist');
+                    changeIt.style.margin="1px 0 0";
+
+                    var searchQuery = event.target.value.toLowerCase();
+                    var displayedContacts = CONTACTS.filter(function(el) {
+                        var searchValue = el.name.toLowerCase();
+
+                        return searchValue.indexOf(searchQuery) !== -1;
+                    });
+                //}
+
+                this.setState({
+                    displayedContacts: displayedContacts
+                });
+            },
+
+            render: function() {
+                return (
+                    <div className="contacts">
+                        <input type="text" className="search-field" onChange={this.handleSearch} />
+                        <ul className="contacts-list" id="contactslist">
+                            {
+                               this.state.displayedContacts.map(function(el) {
+                                    return <Contact
+                                        key={el.id}
+                                        name={el.name}
+                                        phoneNumber={el.phoneNumber}
+                                        url={el.url}
+                                    />;
+                               })
+                            }
+                        </ul>
+                    </div>
+                );
+            }
+        });
+
+
+
+        ReactDOM.render(
+            <ContactsList />,
+            document.getElementById("content")
+        );
+
+    </script>
+</body>
+</html>
